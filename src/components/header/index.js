@@ -6,10 +6,7 @@ import { clearUser } from '../../store/actions/user';
 import { Link } from 'react-router-dom';
 
 class Header extends Component {
-    handleSignOut = () => {
-        signOut();
-        this.props.clearUser()
-    }
+
     render() {
         const { user } = this.props;
         return (
@@ -24,7 +21,7 @@ class Header extends Component {
                 </div> : (
                         <div>
                             <span>{user.email}</span>
-                            <Button onClick={this.handleSignOut}>Sign Out</Button>
+                            <Button onClick={signOut}>Sign Out</Button>
                         </div>
                     )}
             </>

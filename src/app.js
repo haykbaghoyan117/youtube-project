@@ -12,7 +12,7 @@ import * as actions from "./store/actions/user";
 
 class App extends Component {
     componentDidMount() {
-        firebase.auth.onAuthStateChanged((authUser) => authUser && this.props.setUser(authUser));
+        firebase.auth.onAuthStateChanged((authUser) => this.props.setUser(authUser));
     }
 
     render() {
@@ -20,7 +20,6 @@ class App extends Component {
             <div>
                 <BrowserRouter>
                     <Header />
-
                     <Switch>
                         <Route path='/' exact component={Home} />
                         <Route path='/sign-up' exact component={SignUp} />
