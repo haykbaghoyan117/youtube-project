@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { signUpWithEmailAndPassword } from '../../firebase/auth';
+import { connect } from 'react-redux';
 
-export default class SignUp extends Component {
+class SignUp extends Component {
     state = {
         email: "",
         password: ""
@@ -18,7 +19,7 @@ export default class SignUp extends Component {
     }
     componentDidUpdate(prevProps, prevState) {
         if (this.props.user) {
-            this.props.history.push("/")
+            this.props.history.push("/");
 
         }
     }
@@ -26,18 +27,35 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                    <Label for="exampleEmail">Email</Label>
-                    <Input type="email" name="email" value={this.state.email} onChange={this.handleChange} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="examplePassword">Password</Label>
-                    <Input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                </FormGroup>
-
-                <Button >Submit</Button>
-            </Form>
+            <div className="row">
+                <div className="col-4 table-dark">
+                    <Form className='p-3' onSubmit={this.handleSubmit}>
+                        <FormGroup>
+                            <Label for="exampleEmail">Email</Label>
+                            <Input type="email" name="email" value={this.state.email} onChange={this.handleChange} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="examplePassword">Password</Label>
+                            <Input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                        </FormGroup>
+                        <Button>Submit</Button>
+                    </Form>
+                </div>
+                <div className='col-8'>
+                    <img style={{ backgroundImage: "url('https://i.ytimg.com/vi/Y1xScUNsxGY/maxresdefault.jpg')",
+                        width: '100%', height: '700px'}}/>
+                </div>
+            </div>
         )
     }
 }
+const mapStateToProps = (state) => ({
+    user: state.user,
+});;
+
+const mapDispatchToProps = {
+
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

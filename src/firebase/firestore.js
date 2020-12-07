@@ -7,7 +7,6 @@ export const getVideosList = async () => {
         dataArray.push({...elem.data(), id: elem.id})
     })
     return dataArray;
-
 }
 export const getUsersVideos = async (email) => {
 
@@ -17,6 +16,4 @@ export const getUsersVideos = async (email) => {
         dataArray.push(elem.data())
     })
     return dataArray;
-
-
 }
