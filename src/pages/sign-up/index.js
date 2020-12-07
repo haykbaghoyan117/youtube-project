@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { signUpWithEmailAndPassword } from '../../firebase/auth';
+import { connect } from 'react-redux';
 
-export default class SignUp extends Component {
+
+class SignUp extends Component {
     state = {
         email: "",
         password: ""
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
+
         const { email, password } = this.state;
         signUpWithEmailAndPassword(email, password)
 
@@ -18,6 +20,7 @@ export default class SignUp extends Component {
         this.setState({ [target.name]: target.value })
     }
     componentDidUpdate(prevProps, prevState) {
+        console.log(this.props.user)
         if (this.props.user) {
             this.props.history.push("/")
 
@@ -42,3 +45,14 @@ export default class SignUp extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    user: state.user,
+});;
+
+const mapDispatchToProps = {
+
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)

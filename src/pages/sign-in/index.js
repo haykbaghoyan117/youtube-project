@@ -12,7 +12,7 @@ class SignIn extends Component {
         event.preventDefault();
         console.log(this.state);
         const { email, password } = this.state;
-        console.log(signInWithEmailAndPassword(email, password))
+        signInWithEmailAndPassword(email, password)
 
     }
     handleChange = ({ target }) => {
@@ -20,9 +20,9 @@ class SignIn extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        console.log(this.props)
         if (this.props.user) {
             this.props.history.push("/")
-
         }
     }
 
