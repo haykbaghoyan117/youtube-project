@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+
 import {connect} from 'react-redux';
-import {getProfileVideos} from '../../firebase/firestore';
+import { getUsersVideos } from '../../firebase/firestore';
+import { constructYouTubeIframeUrl } from '../../helpers'
+
 
 class Profile extends Component {
     state = {
         likedVideos: []
     }
     componentDidMount() {
-        this.props.user && getProfileVideos(this.props.user.email).then(res => this.setState({likedVideos:res}))
+        this.props.user && getUsersVideos(this.props.user.email).then(res => this.setState({likedVideos:res}))
     }
     
     render() {
@@ -18,18 +22,23 @@ class Profile extends Component {
         return (
             <div>
                {
-                   this.state.likedVideos.map(elem => <iframe src={elem.url} />)
+                   this.state.likedVideos.map(elem => <iframe src={constructYouTubeIframeUrl(elem)} title="s" />)
                }
             </div>
         )
     }
 }
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.user,
+  
 })
 
 const mapDispatchToProps = {
     
+}
+Profile.propTypes = {
+    user: PropTypes.object,
+ 
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)

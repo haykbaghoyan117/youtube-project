@@ -11,20 +11,23 @@ export const getVideosList = async () => {
 export const getUsersVideos = async (email) => {
 
     const dataArray = [];
-    const res = await firestore.collection("videosAndUser").where("email", "==", email).get();
+    const res = await firestore.collection("videos").where("email", "==", email).get();
+    
     res.forEach(elem => {
-        dataArray.push(elem.data())
+        elem.data().idList.forEach(item => {
+            dataArray.push(item)
+        })
     })
-    return dataArray;
+    return dataArray || [];
 }
 export const getProfileVideos = async (email) => {
     const videoIds = [];
     const res = [];
     const list = await getUsersVideos(email);
     list.forEach(elem => {
-        videoIds.push(elem.videoId)
+        videoIds.push(elem)
     })
-    console.log(videoIds)
+    // // console.log(videoIds)
     const refs = await firestore.collection("videos").get()
 
     refs.forEach(function (doc) {

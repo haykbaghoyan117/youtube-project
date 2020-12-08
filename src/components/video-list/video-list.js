@@ -13,7 +13,7 @@ export default class VideoList extends Component {
 
 //     componentDidMount = () => {
 //         const gandon = this.props;
-//         console.log('ggggggggggggg', gandon)
+//         // console.log('ggggggggggggg', gandon)
 //         // const { profileReducer } = this.props;
 //         // const videoStoreService = profileReducer
 
@@ -24,7 +24,7 @@ export default class VideoList extends Component {
 
 //     render() {
 //         const xxx = this.props;
-//         console.log('xxxxxxxxx', xxx)
+//         // console.log('xxxxxxxxx', xxx)
 //         // const { videos } = this.props;
 //         return (
 //             <ul>

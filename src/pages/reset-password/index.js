@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+// import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { auth } from '../../firebase';
 import { deleteUser } from '../../firebase/auth';
@@ -24,9 +24,9 @@ class ResetPassword extends Component {
         event.preventDefault();
         let user = auth.currentUser
         user.updatePassword(this.state.password).then(function () {
-            console.log('fffff')
+            // // console.log('fffff')
         }).catch(function (error) {
-            console.log(error)
+            // console.log(error)
         });
 
     }

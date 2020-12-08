@@ -10,14 +10,14 @@
 //     likesVideos : []
 //   }
 
-//   youtubeRandomVideos = async () => {
-//     const youtube_api_key = "AIzaSyDpPTpWytVM4G-SIzhXj9RuoRnW9TKv2vA";
-//     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&channelId=UCCeAaS4K5IOr3n6KUZvN9zA&key=${youtube_api_key}`;
-//     const res = await fetch(url)
-//     const response = await res.json()
-//     return await `https://www.youtube.com/embed/${response.items[0].id.videoId}`
-//   }
-
+  youtubeRandomVideos = async () => {
+    const youtube_api_key = "AIzaSyDpPTpWytVM4G-SIzhXj9RuoRnW9TKv2vA";
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&channelId=UCCeAaS4K5IOr3n6KUZvN9zA&key=${youtube_api_key}`;
+    const res = await fetch(url)
+    const response = await res.json()
+    return await `https://www.youtube.com/embed/${response.items[0].id.videoId}`
+  }
+ 
   
 //   render () {
 //     return (

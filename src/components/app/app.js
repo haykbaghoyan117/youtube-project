@@ -16,7 +16,7 @@ class App extends Component {
 
   componentDidMount() {
     const db = firebase.database();
-    console.log(db);
+    // // console.log(db);
   };
 
   handleChange = ({ target: { value, id } }) => {
@@ -29,7 +29,7 @@ class App extends Component {
     const { email, password } = this.state;
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((response) => {
-        console.log(response.user);
+        // console.log(response.user);
         this.setState({ hasAccount: true })
       })
       .catch(error => console.log(error))
@@ -38,7 +38,7 @@ class App extends Component {
 
   // createAccount = () => {
   //   firebase.auth().createUserWithEmailAndPassword(email, password)
-  //     .catch(error => console.log(error))
+  //     .catch(error => // console.log(error))
   // };
 
 
@@ -97,7 +97,7 @@ export default App;
 // import reducer from './reducers/index'
 
 // const store = createStore(reducer)
-// console.log(store.getState())
+// // console.log(store.getState())
 // // {
 // //   counter: 0,
 // //   todos: []
@@ -107,7 +107,7 @@ export default App;
 //   type: 'ADD_TODO',
 //   text: 'Use Redux'
 // })
-// console.log(store.getState())
+// // console.log(store.getState())
 // // {
 // //   counter: 0,
 // //   todos: [ 'Use Redux' ]

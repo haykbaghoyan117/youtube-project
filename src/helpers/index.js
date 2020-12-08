@@ -1,0 +1,1 @@
+export const constructYouTubeIframeUrl = (id) => `https://www.youtube.com/embed/${id}`;

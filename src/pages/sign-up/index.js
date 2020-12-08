@@ -18,7 +18,7 @@ class SignUp extends Component {
         this.setState({ [target.name]: target.value })
     }
     componentDidUpdate(prevProps, prevState) {
-        console.log(this.props.user)
+        // console.log(this.props.user)
         if (this.props.user) {
             this.props.history.push("/");
 
@@ -44,7 +44,7 @@ class SignUp extends Component {
                 </div>
                 <div className='col-8'>
                     <img style={{ backgroundImage: "url('https://i.ytimg.com/vi/Y1xScUNsxGY/maxresdefault.jpg')",
-                        width: '100%', height: '700px'}}/>
+                        width: '100%', height: '700px'}} alt=""/>
                 </div>
             </div>
         )

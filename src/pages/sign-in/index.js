@@ -10,7 +10,7 @@ class SignIn extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
         const { email, password } = this.state;
         signInWithEmailAndPassword(email, password);
         this.setState({ email: "", password: "" })
@@ -20,7 +20,7 @@ class SignIn extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log(this.props)
+        // console.log(this.props)
         if (this.props.user) {
             this.props.history.push("/")
         }
@@ -45,7 +45,7 @@ class SignIn extends Component {
                 </div>
                 <div className='col-8'>
                     <img style={{ backgroundImage: "url('https://i.ytimg.com/vi/mof5tnbv_tI/maxresdefault.jpg')",
-                        width: '100%', height: '700px'}}/>
+                        width: '100%', height: '700px'}} alt=""/>
                 </div>
             </div>
         )
