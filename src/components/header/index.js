@@ -13,7 +13,7 @@ class Header extends Component {
             <>
                 { !user ? <div className='d-flex flex-row-reverse bg-dark'>
                     <Link to='/sign-in'>
-                        <Button color="success">Sign In </Button>
+                        <Button color="success">Sign In</Button>
                     </Link>
                     <Link to='/sign-up'>
                         <Button color="success">Sign UP</Button>
