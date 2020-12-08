@@ -11,17 +11,21 @@ class Header extends Component {
         const { user } = this.props;
         return (
             <>
-                { !user ? <div>
+                { !user ? <div className='d-flex flex-row-reverse bg-dark'>
                     <Link to='/sign-in'>
-                        <Button color="success">Sign In</Button>
+                        <Button color="success">Sign In </Button>
                     </Link>
                     <Link to='/sign-up'>
                         <Button color="success">Sign UP</Button>
                     </Link>
                 </div> : (
-                        <div>
-                            <span>{user.email}</span>
+                        <div className='d-flex flex-row-reverse bg-dark text-white'>
                             <Button onClick={signOut}>Sign Out</Button>
+                            <Link to="/profile">
+                                <Button>Profile</Button>
+                            </Link>
+                            <span>{user.email}</span>
+
                         </div>
                     )}
             </>

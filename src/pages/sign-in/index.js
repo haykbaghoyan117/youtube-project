@@ -12,8 +12,8 @@ class SignIn extends Component {
         event.preventDefault();
         console.log(this.state);
         const { email, password } = this.state;
-        signInWithEmailAndPassword(email, password)
-
+        signInWithEmailAndPassword(email, password);
+        this.setState({ email: "", password: "" })
     }
     handleChange = ({ target }) => {
         this.setState({ [target.name]: target.value })
@@ -29,18 +29,25 @@ class SignIn extends Component {
 
     render() {
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                    <Label for="exampleEmail">Email</Label>
-                    <Input type="email" name="email" value={this.state.email} onChange={this.handleChange} />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="examplePassword">Password</Label>
-                    <Input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                </FormGroup>
-
-                <Button>Submit</Button>
-            </Form>
+            <div className="row">
+                <div className="col-4 table-dark">
+                    <Form className='p-3' onSubmit={this.handleSubmit}>
+                        <FormGroup>
+                            <Label for="exampleEmail">Email</Label>
+                            <Input type="email" name="email" value={this.state.email} onChange={this.handleChange} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="examplePassword">Password</Label>
+                            <Input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                        </FormGroup>
+                        <Button>Submit</Button>
+                    </Form>
+                </div>
+                <div className='col-8'>
+                    <img style={{ backgroundImage: "url('https://i.ytimg.com/vi/mof5tnbv_tI/maxresdefault.jpg')",
+                        width: '100%', height: '700px'}}/>
+                </div>
+            </div>
         )
     }
 }

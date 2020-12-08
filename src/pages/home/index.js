@@ -26,26 +26,27 @@ class Home extends Component {
         console.log(this.state.likedVideos)
         const { videos } = this.state;
         return (
-            <div>
-                {
-                    videos && (
-                        <>
-                            {videos.map((elem, index) => {
-                                console.log(this.checkLiked(elem.id))
-                                return (
-                                    <div>
-                                        <iframe key={index} title="link" src={elem.url} />
-                                        { this.props.user && <Button  color="success" disabled={this.checkLiked(elem.id)}>like</Button>}
-                                    </div>
-                                )
-                            })}
-                        </>
-                    )
-                }
+            <div className='row'>
+                 {
+                     videos && (
+                         <>
+                             {videos.map((elem, index) => {
+                                 console.log(this.checkLiked(elem.id))
+                                 return (
+                                     <div className='col-4'>
+                                         <iframe key={index} title="link" src={elem.url} />
+                                         { this.props.user && <Button color="success" disabled={this.checkLiked(elem.id)}>like</Button>}
+                                     </div>
+                                 )
+                             })}
+                         </>
+                     )  
+                 }
             </div>
         )
     }
 }
+
 const mapStateToProps = (state) => ({
     user: state.user
 })
