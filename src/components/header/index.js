@@ -21,11 +21,16 @@ class Header extends Component {
                 </div> : (
                         <div className='d-flex flex-row-reverse bg-dark text-white'>
                             <Button onClick={signOut}>Sign Out</Button>
+                            <Link to="/reset-password">
+                                <Button>User Settings</Button>
+                            </Link>
                             <Link to="/profile">
                                 <Button>Profile</Button>
                             </Link>
+                            <Link to="/">
+                                <Button>Home</Button>
+                            </Link>
                             <span>{user.email}</span>
-
                         </div>
                     )}
             </>

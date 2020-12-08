@@ -7,6 +7,7 @@ export const signUpWithEmailAndPassword = (email, password) => {
     return auth.createUserWithEmailAndPassword(email, password);
 }
 export const signOut = () => auth.signOut();
-
-export const changePassword = password => auth.currentUser.updatePassword(password);
-
+export const deleteUser = () => {
+    console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
+    auth.currentUser.delete();
+}

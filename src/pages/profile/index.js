@@ -13,7 +13,7 @@ class Profile extends Component {
     render() {
        console.log(this.state.likedVideos)
         if(!this.props.user){
-            return <h1>Please Sign in or Signup</h1>
+            return <h1>Please Sign In or Sign Up</h1>
         }
         return (
             <div>
