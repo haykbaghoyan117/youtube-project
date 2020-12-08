@@ -18,6 +18,7 @@ class SignUp extends Component {
         this.setState({ [target.name]: target.value })
     }
     componentDidUpdate(prevProps, prevState) {
+        console.log(this.props.user)
         if (this.props.user) {
             this.props.history.push("/");
 
@@ -58,4 +59,4 @@ const mapDispatchToProps = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
