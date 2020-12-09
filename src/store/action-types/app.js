@@ -1,1 +1,2 @@
 export const SET_VIDEOS = "SET_VIDEOS";
+export const SEARCH_VIDEO_TYPE = 'SEARCH_VIDEO_TYPE';

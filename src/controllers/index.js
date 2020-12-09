@@ -1,18 +1,21 @@
-import youTubeConfig from '../configs/youtube.config'
+import youTubeConfig from '../configs/youtube.config';
 import { setVideos } from '../store/actions/app';
-import store from '../store'
+import store from '../store';
+
 const AppController = {};
 
 
 AppController.init = async () => {
-    AppController.searchVideosFromYouTube("team lead")
+    AppController.searchVideosFromYouTube(store.getState().app.searchVideoType)
+    console.log('==> ==> ==>', store.getState().app.searchVideoType)
+
 }
 AppController.getVideosFromYouTube = async () => {
 
 }
 
-AppController.searchVideosFromYouTube = async (searchString) => {
-    const url = youTubeConfig.apiUrl(searchString);
+AppController.searchVideosFromYouTube = async (search) => {
+    const url = youTubeConfig.apiUrl(search);
     const res = await fetch(url)
     const response = await res.json();
 
@@ -25,4 +28,6 @@ AppController.searchVideosFromYouTube = async (searchString) => {
     // await `https://www.youtube.com/embed/${response.items[0].id.videoId}`
     //response.items[0].id.videoId
 }
+
+
 export default AppController;
