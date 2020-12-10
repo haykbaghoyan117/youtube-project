@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUsersVideos } from "../../firebase/firestore";
+import { getUsersVideos, likeVideo } from "../../firebase/firestore";
 import { Button } from 'reactstrap';
 import AppController from '../../controllers';
 import { constructYouTubeIframeUrl} from '../../helpers';
-import  store  from '../../store';
-import { searchVideoType } from '../../store/actions/app';
+import deepEqual from 'fast-deep-equal';
 
 class Home extends Component {
     state = {
@@ -16,28 +15,30 @@ class Home extends Component {
     componentDidMount() {
         AppController.init()
         // getVideosList().then(res => this.setState({ videos: res }))
-        this.props.user && getUsersVideos(this.props.user.email).then(res => console.log(res))
+        this.props.user && getUsersVideos(this.props.user.email).then(res => this.setState(res))
     }
 
     handleSubmit = (event) => {
         event.preventDefault()
         const { videoType } = this.state;
-        store.dispatch(searchVideoType(videoType));
-        AppController.init()
+        AppController.searchVideosFromYouTube(videoType)
     }
 
     handleChange = ({ target }) => {
         this.setState({ [target.name]: target.value })
     }
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (!deepEqual(this.props.user, prevProps.user) && this.props.user) {
-    //         getUsersVideos(this.props.user.email).then(res => this.setState({ likedVideos: res }))
-    //     }
-    // }
-    checkLiked = (id) => {
-    //    return !!(this.state?.likedVideos.find(e => id === e))
+    componentDidUpdate(prevProps, prevState) {
+        if (!deepEqual(this.props.user, prevProps.user) && this.props.user) {
+            getUsersVideos(this.props.user.email).then(res => this.setState({ likedVideos: res }))
+        }
     }
-
+    checkLiked = (id) => {
+        console.log(this.state.likedVideos, id)
+       return !!(this.state?.likedVideos.find(e => id === e))
+    }
+    handleLike = (hash) => () => {
+        likeVideo(hash)
+    }
     render() {
         // // console.log("eee-->",this.state.likedVideos)
         const { videos } = this.props;
@@ -56,7 +57,7 @@ class Home extends Component {
                                     return (
                                         <div className='col-2 d-flex flex-column m-3'>
                                             <iframe key={index} title="link" src={constructYouTubeIframeUrl(elem.id.videoId)} />
-                                            { this.props.user && <Button color="success" disabled={this.checkLiked(elem.id)}>like</Button>}
+                                            { this.props.user && <Button color="success" disabled={this.checkLiked(elem.id.videoId)} onClick={this.handleLike(elem.id.videoId)}>like</Button>}
                                         </div>
                                     )
                                 })}

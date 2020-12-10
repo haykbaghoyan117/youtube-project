@@ -7,9 +7,8 @@ const AppController = {};
 
 AppController.init = async () => {
     AppController.searchVideosFromYouTube(store.getState().app.searchVideoType)
-    console.log('==> ==> ==>', store.getState().app.searchVideoType)
-
 }
+
 AppController.getVideosFromYouTube = async () => {
 
 }
@@ -20,8 +19,7 @@ AppController.searchVideosFromYouTube = async (search) => {
     const response = await res.json();
 
     if(!response.items){
-
-        return
+        return alert(response.error.message)
     }
 // reducer//dispatch//{type: "SET_VIDEOS", payload: response.item}
     store.dispatch(setVideos(response.items))
