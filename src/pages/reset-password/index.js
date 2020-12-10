@@ -37,7 +37,7 @@ class ResetPassword extends Component {
                 <div className='col-4 table-dark p-5'>
                     <form onSubmit={this.changePassword}>
                         <div className="form-group">
-                            <label for="exampleInputPassword1">Change password</label>
+                            <label htmlFor="exampleInputPassword1">Change password</label>
                             <input onChange={this.handleChange} type="password" className="form-control" name='pass' placeholder="Password" required={true} />
                             <button type="submit" className="btn btn-primary">Change</button>
                         </div>

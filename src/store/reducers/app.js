@@ -1,4 +1,4 @@
-import { SET_VIDEOS, SEARCH_VIDEO_TYPE } from '../action-types/app';
+import { SET_VIDEOS, SET_SEARCH_VIDEO_TEXT } from '../action-types/app';
 
 const initialState = {
     videos: [
@@ -14,11 +14,13 @@ export default (state = initialState, { type, payload }) => {
 
         case SET_VIDEOS: {
             return {
+                ...state,
                 videos: payload
             }
         }
-        case SEARCH_VIDEO_TYPE: {
+        case SET_SEARCH_VIDEO_TEXT: {
             return {
+                ...state,
                 searchVideoType: payload
             }
         }
