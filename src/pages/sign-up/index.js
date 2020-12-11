@@ -17,14 +17,12 @@ class SignUp extends Component {
     handleChange = ({ target }) => {
         this.setState({ [target.name]: target.value })
     }
-    componentDidUpdate(prevProps, prevState) {
-        // console.log(this.props.user)
+    componentDidUpdate() {
         if (this.props.user) {
             this.props.history.push("/");
 
         }
     }
-
 
     render() {
         return (
@@ -52,11 +50,10 @@ class SignUp extends Component {
 }
 const mapStateToProps = (state) => ({
     user: state.user,
-});;
+});
 
 const mapDispatchToProps = {
 
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp)

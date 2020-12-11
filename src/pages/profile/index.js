@@ -14,7 +14,7 @@ class Profile extends Component {
     componentDidMount() {
         this.props.user && getUsersVideos(this.props.user.email).then(res => this.setState({ likedVideos: res }))
     }
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (!deepEqual(this.props.user, prevProps.user) && this.props.user) {
             getUsersVideos(this.props.user.email).then(res => this.setState({ likedVideos: res }))
         }
@@ -51,8 +51,7 @@ const mapDispatchToProps = {
 
 }
 Profile.propTypes = {
-    user: PropTypes.object,
-
+    user: PropTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)

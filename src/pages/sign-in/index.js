@@ -10,7 +10,6 @@ class SignIn extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        // console.log(this.state);
         const { email, password } = this.state;
         signInWithEmailAndPassword(email, password);
         this.setState({ email: "", password: "" })
@@ -19,8 +18,7 @@ class SignIn extends Component {
         this.setState({ [target.name]: target.value })
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        // console.log(this.props)
+    componentDidUpdate() {
         if (this.props.user) {
             this.props.history.push("/")
         }
@@ -53,11 +51,10 @@ class SignIn extends Component {
 }
 const mapStateToProps = (state) => ({
     user: state.user,
-});;
+});
 
 const mapDispatchToProps = {
 
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

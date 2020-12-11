@@ -1,1 +1,1 @@
-export const VIDEOS_LOADED = 'VIDEOS_LOADED';
+export const VIDEOS_LOADED = 'VIDEOS_LOADED'

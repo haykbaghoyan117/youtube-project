@@ -7,7 +7,6 @@ import App from './app';
 import store from './store/';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 ReactDOM.render(
     <Provider store={store}>
         <Router>

@@ -12,11 +12,7 @@ import { setSearchVideoText } from '../../store/actions/app'
 class Home extends Component {
     state = {
         likedVideos : [],
-<<<<<<< HEAD
-        videoType: ''
-=======
         loaderCondition: false
->>>>>>> 4d9b078e3bb961f9bea50307ce9c65181dccce51
     }
    async componentDidMount() {
        this.setState({loaderCondition: true})
@@ -27,27 +23,19 @@ class Home extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        const { searchVideoType } = this.props;
-        AppController.searchVideosFromYouTube(searchVideoType)
+        AppController.searchVideosFromYouTube(this.props.searchVideoType)
     }
 
     handleChange = ({ target }) => {
         this.props.setSearchVideoText(target.value)
-        // this.setState({ [target.name]: target.value })
     }
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (!deepEqual(this.props.user, prevProps.user) && this.props.user) {
             getUsersVideos(this.props.user.email).then(res => this.setState({ likedVideos: res, loaderCondition: false }))
         }
     }
     checkLiked = (id) => {
-<<<<<<< HEAD
-        console.log('--->', this.state.likedVideos, id)
-        console.log('----->', (this.state?.likedVideos.find(e => id === e)))
-       return !!(this.state?.likedVideos.find(e => id === e))
-=======
        return this.state.likedVideos.includes(id)
->>>>>>> 4d9b078e3bb961f9bea50307ce9c65181dccce51
     }
     handleLike = (hash) => async () => {
         await likeVideo(hash);
@@ -57,7 +45,6 @@ class Home extends Component {
         if(this.state.loaderCondition){
             return <Spinner />
         }
-        // // console.log("eee-->",this.state.likedVideos)
         const { videos, searchVideoType } = this.props;
         return (
             <div>
@@ -71,7 +58,6 @@ class Home extends Component {
                         videos && (
                             <>
                                 {videos.map((elem, index) => {
-                                    // console.log(this.checkLiked(elem.id))
                                     return (
                                         <Col key={index} xs="3">
                                             <iframe  title="link" src={constructYouTubeIframeUrl(elem.id.videoId)} />
@@ -93,12 +79,11 @@ class Home extends Component {
 const mapStateToProps = (state) => ({
     user: state.user,
     videos: state.app.videos,
-    searchVideoType: state.app.searchVideoType,
-
-})
+    searchVideoType: state.app.searchVideoType
+});
 
 const mapDispatchToProps = {
     setSearchVideoText
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
