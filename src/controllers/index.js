@@ -7,6 +7,7 @@ const AppController = {};
 
 AppController.init = async () => {
     AppController.searchVideosFromYouTube(store.getState().app.searchVideoType)
+    console.log('->', store.getState().app.searchVideoType)
 }
 
 AppController.getVideosFromYouTube = async () => {

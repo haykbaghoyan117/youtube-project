@@ -8,6 +8,7 @@ export const signUpWithEmailAndPassword = (email, password) => {
 }
 export const signOut = () => auth.signOut();
 export const deleteUser = () => {
-    // // console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
-    auth.currentUser.delete();
+    auth.currentUser.delete()
+    .then(console.log('deleted'))
+    .catch(err => console.log(alert(err)))
 }

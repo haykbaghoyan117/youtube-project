@@ -18,6 +18,9 @@ export default (state = initialState, { type, payload }) => {
             }
         }
         case SEARCH_VIDEO_TYPE: {
+            if (payload !== '') {
+                return {searchVideoType: 'killdim'}
+            }
             return {
                 searchVideoType: payload
             }

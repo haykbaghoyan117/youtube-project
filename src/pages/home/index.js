@@ -10,7 +10,7 @@ class Home extends Component {
     state = {
         videos: null,
         likedVideos : [],
-        videoType: '',
+        videoType: ''
     }
     componentDidMount() {
         AppController.init()
@@ -33,7 +33,8 @@ class Home extends Component {
         }
     }
     checkLiked = (id) => {
-        console.log(this.state.likedVideos, id)
+        console.log('--->', this.state.likedVideos, id)
+        console.log('----->', (this.state?.likedVideos.find(e => id === e)))
        return !!(this.state?.likedVideos.find(e => id === e))
     }
     handleLike = (hash) => () => {
