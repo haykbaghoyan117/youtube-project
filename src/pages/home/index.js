@@ -1,71 +1,89 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getUsersVideos, likeVideo } from "../../firebase/firestore";
-import { Button } from 'reactstrap';
+import { Button, Container, Row, Col } from 'reactstrap';
+
 import AppController from '../../controllers';
 import { constructYouTubeIframeUrl} from '../../helpers';
 import deepEqual from 'fast-deep-equal';
+import Spinner from '../../components/spinner';
+import { setSearchVideoText } from '../../store/actions/app'
 
 class Home extends Component {
     state = {
-        videos: null,
         likedVideos : [],
+<<<<<<< HEAD
         videoType: ''
+=======
+        loaderCondition: false
+>>>>>>> 4d9b078e3bb961f9bea50307ce9c65181dccce51
     }
-    componentDidMount() {
-        AppController.init()
-        // getVideosList().then(res => this.setState({ videos: res }))
-        this.props.user && getUsersVideos(this.props.user.email).then(res => this.setState(res))
+   async componentDidMount() {
+       this.setState({loaderCondition: true})
+       await AppController.init()
+        this.props.user && await getUsersVideos(this.props.user.email).then(res => this.setState({ likedVideos: res }));
+        this.setState({loaderCondition:false})
     }
 
     handleSubmit = (event) => {
         event.preventDefault()
-        const { videoType } = this.state;
-        AppController.searchVideosFromYouTube(videoType)
+        const { searchVideoType } = this.props;
+        AppController.searchVideosFromYouTube(searchVideoType)
     }
 
     handleChange = ({ target }) => {
-        this.setState({ [target.name]: target.value })
+        this.props.setSearchVideoText(target.value)
+        // this.setState({ [target.name]: target.value })
     }
     componentDidUpdate(prevProps, prevState) {
         if (!deepEqual(this.props.user, prevProps.user) && this.props.user) {
-            getUsersVideos(this.props.user.email).then(res => this.setState({ likedVideos: res }))
+            getUsersVideos(this.props.user.email).then(res => this.setState({ likedVideos: res, loaderCondition: false }))
         }
     }
     checkLiked = (id) => {
+<<<<<<< HEAD
         console.log('--->', this.state.likedVideos, id)
         console.log('----->', (this.state?.likedVideos.find(e => id === e)))
        return !!(this.state?.likedVideos.find(e => id === e))
+=======
+       return this.state.likedVideos.includes(id)
+>>>>>>> 4d9b078e3bb961f9bea50307ce9c65181dccce51
     }
-    handleLike = (hash) => () => {
-        likeVideo(hash)
+    handleLike = (hash) => async () => {
+        await likeVideo(hash);
+        this.props.user && getUsersVideos(this.props.user.email).then(res => this.setState({ likedVideos: res }))
     }
     render() {
+        if(this.state.loaderCondition){
+            return <Spinner />
+        }
         // // console.log("eee-->",this.state.likedVideos)
-        const { videos } = this.props;
+        const { videos, searchVideoType } = this.props;
         return (
             <div>
                 <form className='form form-group' onSubmit={this.handleSubmit}>
-                    <input type='text' placeholder='Search videos' name='videoType' value={this.state.videoType} onChange={this.handleChange} />
+                    <input type='text' placeholder='Search videos' name='videoType' value={searchVideoType} onChange={this.handleChange} />
                     <button type='submit'>Search</button>
                 </form>
-                <div className='row  d-flex justify-content-between'>
+                <Container className="themed-container">
+                    <Row className="justify-content-between">
                     {
                         videos && (
                             <>
                                 {videos.map((elem, index) => {
                                     // console.log(this.checkLiked(elem.id))
                                     return (
-                                        <div className='col-2 d-flex flex-column m-3'>
-                                            <iframe key={index} title="link" src={constructYouTubeIframeUrl(elem.id.videoId)} />
+                                        <Col key={index} xs="3">
+                                            <iframe  title="link" src={constructYouTubeIframeUrl(elem.id.videoId)} />
                                             { this.props.user && <Button color="success" disabled={this.checkLiked(elem.id.videoId)} onClick={this.handleLike(elem.id.videoId)}>like</Button>}
-                                        </div>
+                                        </Col>
                                     )
                                 })}
                             </>
                         )  
                     }
-                </div>
+                    </Row>
+                </Container>
             </div>
 
         )
@@ -74,12 +92,13 @@ class Home extends Component {
 
 const mapStateToProps = (state) => ({
     user: state.user,
-    videos: state.app.videos
+    videos: state.app.videos,
+    searchVideoType: state.app.searchVideoType,
 
 })
 
 const mapDispatchToProps = {
-
+    setSearchVideoText
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

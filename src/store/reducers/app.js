@@ -1,4 +1,4 @@
-import { SET_VIDEOS, SEARCH_VIDEO_TYPE } from '../action-types/app';
+import { SET_VIDEOS, SET_SEARCH_VIDEO_TEXT } from '../action-types/app';
 
 const initialState = {
     videos: [
@@ -14,14 +14,20 @@ export default (state = initialState, { type, payload }) => {
 
         case SET_VIDEOS: {
             return {
+                ...state,
                 videos: payload
             }
         }
+<<<<<<< HEAD
         case SEARCH_VIDEO_TYPE: {
             if (payload !== '') {
                 return {searchVideoType: 'killdim'}
             }
+=======
+        case SET_SEARCH_VIDEO_TEXT: {
+>>>>>>> 4d9b078e3bb961f9bea50307ce9c65181dccce51
             return {
+                ...state,
                 searchVideoType: payload
             }
         }
